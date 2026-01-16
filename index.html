@@ -3,143 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animation Collection | 上品なアニメーション見本帳</title>
+    <title>Web Design Resources | デザインリソースハブ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
-    <!-- Google Fonts: 明朝体を使用 -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+JP:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Zen+Old+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        serif: ['"Noto Serif JP"', 'serif'],
-                        display: ['"Cormorant Garamond"', 'serif'],
+                        serif: ['"Zen Old Mincho"', 'serif'],
+                        display: ['"Cinzel"', 'serif'],
                     },
                     colors: {
-                        base: '#fafaf9',      /* stone-50 */
-                        surface: '#ffffff',
-                        text: '#44403c',      /* stone-700 */
-                        muted: '#a8a29e',     /* stone-400 */
-                        gold: '#d4af37',      /* Classic Gold */
-                        goldLight: '#f3e5ab',
-                        rose: '#e1adac',      /* Muted Rose */
-                        accent: '#c08497'
+                        bg: '#FFFCF5',        /* ウォームクリーム */
+                        surface: '#FFFFFF',
+                        text: '#3E2723',      /* ディープブラウン */
+                        muted: '#8D6E63',     /* ウォームブラウン */
+                        gold: '#D4AF37',      /* リッチゴールド */
+                        goldLight: '#F9E79F', 
+                        accent: '#C2185B',    /* ルビーレッド */
+                        dark: '#261C19'       /* エスプレッソ */
+                    },
+                    backgroundImage: {
+                        'gradient-luxury': 'linear-gradient(135deg, #C2185B 0%, #D4AF37 100%)',
+                        'gradient-card': 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,252,245,0.95) 100%)',
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -10px rgba(62, 39, 35, 0.1)',
+                        'glow': '0 0 20px rgba(212, 175, 55, 0.2)',
+                        'inner-gold': 'inset 0 0 0 1px rgba(212, 175, 55, 0.3)',
                     },
                     animation: {
-                        // Basic Fades
-                        'fade-in': 'fadeIn 1s ease-out forwards',
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                        'fade-in-down': 'fadeInDown 0.8s ease-out forwards',
-                        'fade-in-left': 'fadeInLeft 0.8s ease-out forwards',
-                        'fade-in-right': 'fadeInRight 0.8s ease-out forwards',
-                        
-                        // Zooms
-                        'zoom-in': 'zoomIn 0.6s ease-out forwards',
-                        'zoom-in-up': 'zoomInUp 0.6s ease-out forwards',
-                        'zoom-in-down': 'zoomInDown 0.6s ease-out forwards',
-                        
-                        // Bounces (Entrance)
-                        'bounce-in': 'bounceIn 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards',
-                        
-                        // Slides
-                        'slide-up': 'slideUp 0.5s ease-out forwards',
-                        'slide-down': 'slideDown 0.5s ease-out forwards',
-                        
-                        // Rotations
-                        'rotate-in': 'rotateIn 0.6s ease-out forwards',
-                        'rotate-in-down-left': 'rotateInDownLeft 0.6s ease-out forwards',
-                        
-                        // Special Entrances
-                        'roll-in': 'rollIn 0.6s ease-out forwards',
-                        'jack-in-the-box': 'jackInTheBox 0.6s forwards',
-                        'light-speed-in': 'lightSpeedInRight 0.6s ease-out forwards',
-                        
-                        // Attention Seekers
-                        'bounce-custom': 'bounceCustom 1s infinite',
-                        'flash': 'flash 1.5s infinite',
-                        'pulse': 'pulse 1s infinite',
-                        'rubber-band': 'rubberBand 1s forwards',
-                        'shake-x': 'shakeX 1s forwards',
-                        'shake-y': 'shakeY 1s forwards',
-                        'head-shake': 'headShake 1s ease-in-out forwards',
-                        'swing': 'swing 1s forwards',
-                        'tada': 'tada 1s forwards',
-                        'wobble': 'wobble 1s forwards',
-                        'jello': 'jello 1s forwards',
-                        'heartbeat': 'heartbeat 1.5s ease-in-out infinite',
-                        
-                        // Flips
-                        'flip': 'flip 1s forwards',
-                        'flip-in-x': 'flipInX 0.8s forwards',
-                        'flip-in-y': 'flipInY 0.8s forwards',
-                        
-                        // Text & Decor
-                        'tracking-in': 'trackingIn 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both',
-                        'blur-in': 'blurIn 0.8s ease-out forwards',
-                        'float': 'float 3s ease-in-out infinite',
-                        'spin-slow': 'spin 4s linear infinite',
-                        'gradient-flow': 'gradientFlow 3s ease infinite',
-                        'glitch': 'glitch 1s linear infinite',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
                     },
                     keyframes: {
-                        // Basic Fades
-                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-                        fadeInUp: { '0%': { opacity: '0', transform: 'translate3d(0, 40px, 0)' }, '100%': { opacity: '1', transform: 'translate3d(0, 0, 0)' } },
-                        fadeInDown: { '0%': { opacity: '0', transform: 'translate3d(0, -40px, 0)' }, '100%': { opacity: '1', transform: 'translate3d(0, 0, 0)' } },
-                        fadeInLeft: { '0%': { opacity: '0', transform: 'translate3d(-40px, 0, 0)' }, '100%': { opacity: '1', transform: 'translate3d(0, 0, 0)' } },
-                        fadeInRight: { '0%': { opacity: '0', transform: 'translate3d(40px, 0, 0)' }, '100%': { opacity: '1', transform: 'translate3d(0, 0, 0)' } },
-
-                        // Zooms
-                        zoomIn: { '0%': { opacity: '0', transform: 'scale3d(0.3, 0.3, 0.3)' }, '50%': { opacity: '1' }, '100%': { opacity: '1' } },
-                        zoomInUp: { '0%': { opacity: '0', transform: 'scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0)', animationTimingFunction: 'cubic-bezier(0.550, 0.055, 0.675, 0.190)' }, '60%': { opacity: '1', transform: 'scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0)', animationTimingFunction: 'cubic-bezier(0.175, 0.885, 0.320, 1)' }, '100%': { opacity: '1', transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)' } },
-                        zoomInDown: { '0%': { opacity: '0', transform: 'scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0)', animationTimingFunction: 'cubic-bezier(0.550, 0.055, 0.675, 0.190)' }, '60%': { opacity: '1', transform: 'scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0)', animationTimingFunction: 'cubic-bezier(0.175, 0.885, 0.320, 1)' }, '100%': { opacity: '1', transform: 'scale3d(1, 1, 1) translate3d(0, 0, 0)' } },
-
-                        // Slides
-                        slideUp: { '0%': { transform: 'translateY(100%)', visibility: 'visible' }, '100%': { transform: 'translateY(0)' } },
-                        slideDown: { '0%': { transform: 'translateY(-100%)', visibility: 'visible' }, '100%': { transform: 'translateY(0)' } },
-
-                        // Rotations
-                        rotateIn: { '0%': { transform: 'rotate3d(0, 0, 1, -200deg)', opacity: '0' }, '100%': { transform: 'translate3d(0, 0, 0)', opacity: '1' } },
-                        rotateInDownLeft: { '0%': { transform: 'rotate3d(0, 0, 1, -45deg)', opacity: '0', transformOrigin: 'left bottom' }, '100%': { transform: 'translate3d(0, 0, 0)', opacity: '1', transformOrigin: 'left bottom' } },
-
-                        // Special Entrances
-                        rollIn: { '0%': { opacity: '0', transform: 'translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg)' }, '100%': { opacity: '1', transform: 'translate3d(0, 0, 0)' } },
-                        jackInTheBox: { '0%': { opacity: '0', transform: 'scale(0.1) rotate(30deg)', transformOrigin: 'center bottom' }, '50%': { transform: 'rotate(-10deg)' }, '70%': { transform: 'rotate(3deg)' }, '100%': { opacity: '1', transform: 'scale(1)' } },
-                        lightSpeedInRight: { '0%': { transform: 'translate3d(100%, 0, 0) skewX(-30deg)', opacity: '0' }, '60%': { transform: 'skewX(20deg)', opacity: '1' }, '80%': { transform: 'skewX(-5deg)' }, '100%': { transform: 'translate3d(0, 0, 0)' } },
-
-                        // Bounce Entrance
-                        bounceIn: { '0%, 20%, 40%, 60%, 80%, 100%': { animationTimingFunction: 'cubic-bezier(0.215, 0.610, 0.355, 1.000)' }, '0%': { opacity: '0', transform: 'scale3d(0.3, 0.3, 0.3)' }, '20%': { transform: 'scale3d(1.1, 1.1, 1.1)' }, '40%': { transform: 'scale3d(0.9, 0.9, 0.9)' }, '60%': { opacity: '1', transform: 'scale3d(1.03, 1.03, 1.03)' }, '80%': { transform: 'scale3d(0.97, 0.97, 0.97)' }, '100%': { opacity: '1', transform: 'scale3d(1, 1, 1)' } },
-
-                        // Attention Seekers
-                        bounceCustom: { '0%, 100%': { transform: 'translateY(-25%)', animationTimingFunction: 'cubic-bezier(0.8,0,1,1)' }, '50%': { transform: 'translateY(0)', animationTimingFunction: 'cubic-bezier(0,0,0.2,1)' } },
-                        flash: { '0%, 50%, 100%': { opacity: '1' }, '25%, 75%': { opacity: '0' } },
-                        pulse: { '0%': { transform: 'scale3d(1, 1, 1)' }, '50%': { transform: 'scale3d(1.05, 1.05, 1.05)' }, '100%': { transform: 'scale3d(1, 1, 1)' } },
-                        rubberBand: { '0%': { transform: 'scale3d(1, 1, 1)' }, '30%': { transform: 'scale3d(1.25, 0.75, 1)' }, '40%': { transform: 'scale3d(0.75, 1.25, 1)' }, '50%': { transform: 'scale3d(1.15, 0.85, 1)' }, '65%': { transform: 'scale3d(0.95, 1.05, 1)' }, '75%': { transform: 'scale3d(1.05, 0.95, 1)' }, '100%': { transform: 'scale3d(1, 1, 1)' } },
-                        shakeX: { '0%, 100%': { transform: 'translate3d(0, 0, 0)' }, '10%, 30%, 50%, 70%, 90%': { transform: 'translate3d(-10px, 0, 0)' }, '20%, 40%, 60%, 80%': { transform: 'translate3d(10px, 0, 0)' } },
-                        shakeY: { '0%, 100%': { transform: 'translate3d(0, 0, 0)' }, '10%, 30%, 50%, 70%, 90%': { transform: 'translate3d(0, -10px, 0)' }, '20%, 40%, 60%, 80%': { transform: 'translate3d(0, 10px, 0)' } },
-                        headShake: { '0%': { transform: 'translateX(0)' }, '6.5%': { transform: 'translateX(-6px) rotateY(-9deg)' }, '18.5%': { transform: 'translateX(5px) rotateY(7deg)' }, '31.5%': { transform: 'translateX(-3px) rotateY(-5deg)' }, '43.5%': { transform: 'translateX(2px) rotateY(3deg)' }, '50%': { transform: 'translateX(0)' } },
-                        swing: { '20%': { transform: 'rotate3d(0, 0, 1, 15deg)' }, '40%': { transform: 'rotate3d(0, 0, 1, -10deg)' }, '60%': { transform: 'rotate3d(0, 0, 1, 5deg)' }, '80%': { transform: 'rotate3d(0, 0, 1, -5deg)' }, '100%': { transform: 'rotate3d(0, 0, 1, 0deg)' } },
-                        tada: { '0%': { transform: 'scale3d(1, 1, 1)' }, '10%, 20%': { transform: 'scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg)' }, '30%, 50%, 70%, 90%': { transform: 'scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg)' }, '40%, 60%, 80%': { transform: 'scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg)' }, '100%': { transform: 'scale3d(1, 1, 1)' } },
-                        wobble: { '0%': { transform: 'translate3d(0, 0, 0)' }, '15%': { transform: 'translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg)' }, '30%': { transform: 'translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg)' }, '45%': { transform: 'translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg)' }, '60%': { transform: 'translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg)' }, '75%': { transform: 'translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg)' }, '100%': { transform: 'translate3d(0, 0, 0)' } },
-                        jello: { '0%, 11.1%, 100%': { transform: 'translate3d(0, 0, 0)' }, '22.2%': { transform: 'skewX(-12.5deg) skewY(-12.5deg)' }, '33.3%': { transform: 'skewX(6.25deg) skewY(6.25deg)' }, '44.4%': { transform: 'skewX(-3.125deg) skewY(-3.125deg)' }, '55.5%': { transform: 'skewX(1.5625deg) skewY(1.5625deg)' }, '66.6%': { transform: 'skewX(-0.78125deg) skewY(-0.78125deg)' }, '77.7%': { transform: 'skewX(0.390625deg) skewY(0.390625deg)' }, '88.8%': { transform: 'skewX(-0.1953125deg) skewY(-0.1953125deg)' } },
-                        heartbeat: { '0%': { transform: 'scale(1)' }, '14%': { transform: 'scale(1.3)' }, '28%': { transform: 'scale(1)' }, '42%': { transform: 'scale(1.3)' }, '70%': { transform: 'scale(1)' } },
-
-                        // Flips
-                        flip: { '0%': { transform: 'perspective(400px) rotate3d(0, 1, 0, -360deg)', animationTimingFunction: 'ease-out' }, '40%': { transform: 'perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -190deg)', animationTimingFunction: 'ease-out' }, '50%': { transform: 'perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg)', animationTimingFunction: 'ease-in' }, '80%': { transform: 'perspective(400px) scale3d(0.95, 0.95, 0.95)', animationTimingFunction: 'ease-in' }, '100%': { transform: 'perspective(400px)', animationTimingFunction: 'ease-in' } },
-                        flipInX: { '0%': { transform: 'perspective(400px) rotate3d(1, 0, 0, 90deg)', animationTimingFunction: 'ease-in', opacity: '0' }, '40%': { transform: 'perspective(400px) rotate3d(1, 0, 0, -20deg)', animationTimingFunction: 'ease-in' }, '60%': { transform: 'perspective(400px) rotate3d(1, 0, 0, 10deg)', opacity: '1' }, '80%': { transform: 'perspective(400px) rotate3d(1, 0, 0, -5deg)' }, '100%': { transform: 'perspective(400px)' } },
-                        flipInY: { '0%': { transform: 'perspective(400px) rotate3d(0, 1, 0, 90deg)', animationTimingFunction: 'ease-in', opacity: '0' }, '40%': { transform: 'perspective(400px) rotate3d(0, 1, 0, -20deg)', animationTimingFunction: 'ease-in' }, '60%': { transform: 'perspective(400px) rotate3d(0, 1, 0, 10deg)', opacity: '1' }, '80%': { transform: 'perspective(400px) rotate3d(0, 1, 0, -5deg)' }, '100%': { transform: 'perspective(400px)' } },
-
-                        // Text & Decor
-                        trackingIn: { '0%': { letterSpacing: '-0.5em', opacity: '0' }, '40%': { opacity: '0.6' }, '100%': { opacity: '1' } },
-                        blurIn: { '0%': { filter: 'blur(12px)', opacity: '0' }, '100%': { filter: 'blur(0)', opacity: '1' } },
-                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } },
-                        gradientFlow: { '0%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' }, '100%': { backgroundPosition: '0% 50%' } },
-                        glitch: { '0%': { transform: 'translate(0)' }, '20%': { transform: 'translate(-2px, 2px)' }, '40%': { transform: 'translate(-2px, -2px)' }, '60%': { transform: 'translate(2px, 2px)' }, '80%': { transform: 'translate(2px, -2px)' }, '100%': { transform: 'translate(0)' } },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
                     }
                 }
             }
@@ -147,621 +59,140 @@
     </script>
     <style>
         body {
-            font-family: 'Noto Serif JP', serif;
-            background-color: #fafaf9;
-            color: #44403c;
-            overflow-x: hidden;
+            font-family: 'Zen Old Mincho', serif;
+            background-color: #FFFCF5;
+            color: #3E2723;
+            /* ダマスク風テクスチャ */
             background-image: 
-                radial-gradient(#e7e5e4 1px, transparent 1px),
-                radial-gradient(#e7e5e4 1px, transparent 1px);
-            background-size: 40px 40px;
-            background-position: 0 0, 20px 20px;
+                radial-gradient(circle at 100% 100%, rgba(212, 175, 55, 0.05) 10px, transparent 11px),
+                radial-gradient(circle at 0% 0%, rgba(194, 24, 91, 0.03) 20px, transparent 21px);
+            background-size: 60px 60px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #fafaf9; }
-        ::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #a8a29e; }
-
-        /* Reveal on Scroll */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Card Styling */
-        .anim-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-        }
-        .anim-card:hover {
-            transform: translateY(-8px);
-            background: #ffffff;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-            border-color: #d4af37;
-        }
-
-        /* Copy Tooltip */
-        .tooltip {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #44403c;
-            color: #fff;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-            white-space: nowrap;
-            font-family: sans-serif;
-        }
-        .tooltip.show {
-            opacity: 1;
-            animation: fadeOut 1.5s forwards;
-        }
-        @keyframes fadeOut {
-            0% { opacity: 1; }
-            70% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        /* Elegant Button */
-        .btn-elegant {
+        /* リンクカードのホバーエフェクト */
+        .portal-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
         }
-        .btn-elegant::after {
+        .portal-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: 0.5s;
+            height: 4px;
+            background: linear-gradient(90deg, #C2185B, #D4AF37);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        .btn-elegant:hover::after {
-            left: 100%;
+        .portal-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(194, 24, 91, 0.15);
+            border-color: #D4AF37;
+        }
+        .portal-card:hover::before {
+            opacity: 1;
+        }
+        
+        /* アイコンの背景アニメーション */
+        .icon-bg {
+            transition: transform 0.5s ease;
+        }
+        .portal-card:hover .icon-bg {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* 背景装飾 */
+        .bg-decoration {
+            position: absolute;
+            z-index: -1;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
         }
     </style>
 </head>
-<body class="min-h-screen">
+<body>
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-stone-200">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <i class="fa-solid fa-crown text-gold text-xl"></i>
-                <span class="text-xl font-display font-semibold tracking-wider text-stone-700">
-                    Animation Collection
-                </span>
-            </div>
-            <a href="#" class="text-stone-400 hover:text-gold transition-colors font-sm tracking-widest text-xs uppercase">
-                Reference
-            </a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="pt-40 pb-24 px-6 text-center relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full pointer-events-none opacity-30 bg-gradient-to-b from-white via-transparent to-transparent"></div>
-        <div class="container mx-auto relative z-10">
-            <span class="inline-block mb-4 text-gold tracking-[0.3em] text-sm font-semibold uppercase animate-fade-in">Web Design Resources</span>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-medium mb-8 animate-fade-in-down text-stone-800 leading-tight">
-                Elegant Animation<br>
-                <span class="italic text-accent/80">Catalogue</span>
-            </h1>
-            <p class="text-md md:text-lg text-stone-500 mb-12 max-w-2xl mx-auto animate-fade-in-up leading-relaxed" style="animation-delay: 0.2s;">
-                洗練されたWebアニメーションのコレクション。<br>
-                クリックで動きを確認し、名称をコピーしてご活用ください。
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in-up" style="animation-delay: 0.4s;">
-                <a href="#entrances" class="btn-elegant px-8 py-3 bg-stone-800 text-white rounded-sm font-medium tracking-wide shadow-lg shadow-stone-300">
-                    Basic Entrances
-                </a>
-                <a href="#attention" class="btn-elegant px-8 py-3 bg-white text-stone-700 border border-stone-300 rounded-sm font-medium tracking-wide hover:border-gold transition-colors">
-                    Attention Effects
-                </a>
-            </div>
-        </div>
-    </header>
+    <!-- Background Decorations -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="bg-decoration w-96 h-96 bg-accent top-[-100px] left-[-100px]"></div>
+        <div class="bg-decoration w-[500px] h-[500px] bg-gold bottom-[-150px] right-[-150px] opacity-20"></div>
+    </div>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-6 pb-24">
-
-        <!-- 1. 基本の出現 -->
-        <section id="entrances" class="mb-24">
-            <div class="text-center mb-16 reveal">
-                <span class="block text-gold text-2xl mb-2"><i class="fa-solid fa-feather-pointed"></i></span>
-                <h2 class="text-3xl font-display text-stone-700">Basic Entrances</h2>
-                <div class="w-12 h-0.5 bg-gold/50 mx-auto mt-4"></div>
-            </div>
+    <main class="flex-grow flex items-center justify-center py-20 px-6">
+        <div class="container mx-auto max-w-5xl">
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Fade In -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-fade-in')">
-                    <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="w-16 h-16 bg-rose-200 rounded-full animate-fade-in shadow-inner flex items-center justify-center text-white"><i class="fa-solid fa-wind"></i></div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Fade In</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Fade In')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
+            <!-- Header Section -->
+            <div class="text-center mb-16 animate-fade-in-up">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full border border-gold/30 bg-white shadow-glow mb-6">
+                    <i class="fa-solid fa-crown text-2xl text-gradient-to-r from-accent to-gold text-transparent bg-clip-text text-accent"></i>
                 </div>
-
-                <!-- Fade In Up -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-fade-in-up')">
-                    <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="w-16 h-16 bg-stone-200 rounded-full animate-fade-in-up shadow-inner flex items-center justify-center text-white"><i class="fa-solid fa-arrow-up"></i></div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Fade In Up</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Fade In Up')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Zoom In -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-zoom-in')">
-                    <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="w-16 h-16 bg-goldLight rounded-full animate-zoom-in shadow-inner flex items-center justify-center text-gold"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Zoom In</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Zoom In')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Slide Up -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-slide-up')">
-                    <div class="h-24 flex items-center justify-center mb-6 overflow-hidden">
-                        <div class="w-24 h-1 bg-stone-300 rounded-full animate-slide-up"></div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Slide Up</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Slide Up')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. 特殊な出現 -->
-        <section id="special-entrances" class="mb-24">
-            <div class="text-center mb-16 reveal">
-                <span class="block text-gold text-2xl mb-2"><i class="fa-solid fa-star-of-david"></i></span>
-                <h2 class="text-3xl font-display text-stone-700">Special Entrances</h2>
-                <div class="w-12 h-0.5 bg-gold/50 mx-auto mt-4"></div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Rotate In -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-rotate-in')">
-                    <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="w-14 h-14 border border-stone-400 rotate-45 animate-rotate-in"></div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Rotate In</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Rotate In')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                 <!-- Light Speed In -->
-                 <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-light-speed-in')">
-                    <div class="h-24 flex items-center justify-center mb-6 overflow-hidden">
-                        <div class="text-2xl font-display text-accent italic animate-light-speed-in">Swiftly</div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Light Speed</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Light Speed In')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Roll In -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-roll-in')">
-                    <div class="h-24 flex items-center justify-center mb-6 overflow-hidden">
-                        <div class="w-12 h-12 rounded-full border border-gold flex items-center justify-center animate-roll-in text-gold"><i class="fa-solid fa-leaf"></i></div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Roll In</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Roll In')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Jack In The Box -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-jack-in-the-box')">
-                    <div class="h-24 flex items-center justify-center mb-6 overflow-hidden">
-                        <div class="w-12 h-12 bg-rose text-white flex items-center justify-center text-xl font-display animate-jack-in-the-box shadow-md rounded-sm">Hi!</div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Jack In Box</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Jack In The Box')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. 注目・強調 -->
-        <section id="attention" class="mb-24">
-            <div class="text-center mb-16 reveal">
-                <span class="block text-gold text-2xl mb-2"><i class="fa-regular fa-bell"></i></span>
-                <h2 class="text-3xl font-display text-stone-700">Attention Effects</h2>
-                <div class="w-12 h-0.5 bg-gold/50 mx-auto mt-4"></div>
+                <h1 class="text-4xl md:text-6xl font-display font-bold text-text mb-4 tracking-wide">
+                    Web Design <span class="text-accent">Hub</span>
+                </h1>
+                <p class="text-muted font-serif text-lg tracking-widest uppercase">
+                    Premium Resources Collection
+                </p>
+                <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mt-8"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Bounce -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-bounce-custom')">
-                    <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="w-4 h-4 bg-accent rounded-full animate-bounce-custom"></div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Bounce</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Bounce')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 px-4 md:px-0">
 
-                <!-- Pulse -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-pulse')">
-                    <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="w-14 h-14 border border-rose rounded-full animate-pulse flex items-center justify-center text-rose"><i class="fa-regular fa-heart"></i></div>
+                <!-- 1. Animation Library Link -->
+                <a href="https://kenshiro0909.github.io/Gemi-hub/AnimationLibrary.html" class="portal-card group bg-surface border border-gold/20 rounded-xl p-8 md:p-10 shadow-soft animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="flex items-start justify-between mb-8">
+                        <div class="icon-bg w-16 h-16 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-accent shadow-inner">
+                            <i class="fa-solid fa-wand-magic-sparkles text-3xl"></i>
+                        </div>
+                        <span class="text-gold/50 font-display text-4xl font-bold opacity-30 group-hover:opacity-100 transition-opacity">01</span>
                     </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Pulse</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Pulse')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
+                    <h2 class="text-2xl font-display font-bold text-text mb-3 group-hover:text-accent transition-colors">
+                        Animation Collection
+                    </h2>
+                    <p class="text-muted text-sm leading-relaxed mb-6 font-serif">
+                        視線を集めるリッチな動きと、洗練されたトランジション。<br>
+                        コピペで使えるアニメーションのライブラリ。
+                    </p>
+                    <div class="flex items-center text-accent text-xs font-bold tracking-widest uppercase group-hover:translate-x-2 transition-transform">
+                        View Library <i class="fa-solid fa-arrow-right ml-2"></i>
                     </div>
-                </div>
+                </a>
 
-                <!-- Rubber Band -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-rubber-band')">
-                    <div class="h-24 flex items-center justify-center mb-6">
-                         <span class="inline-block px-4 py-1 border border-stone-400 text-stone-500 rounded-full animate-rubber-band text-sm">Button</span>
+                <!-- 2. Design Pattern Library Link -->
+                <a href="design.html" class="portal-card group bg-surface border border-gold/20 rounded-xl p-8 md:p-10 shadow-soft animate-fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="flex items-start justify-between mb-8">
+                        <div class="icon-bg w-16 h-16 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-gold shadow-inner">
+                            <i class="fa-solid fa-layer-group text-3xl"></i>
+                        </div>
+                        <span class="text-gold/50 font-display text-4xl font-bold opacity-30 group-hover:opacity-100 transition-opacity">02</span>
                     </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Rubber Band</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Rubber Band')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
+                    <h2 class="text-2xl font-display font-bold text-text mb-3 group-hover:text-gold transition-colors">
+                        Design Patterns
+                    </h2>
+                    <p class="text-muted text-sm leading-relaxed mb-6 font-serif">
+                        絢爛豪華なUIパーツとレイアウト集。<br>
+                        Geminiへの指示プロンプトを取得できるデザインカタログ。
+                    </p>
+                    <div class="flex items-center text-gold text-xs font-bold tracking-widest uppercase group-hover:translate-x-2 transition-transform">
+                        View Patterns <i class="fa-solid fa-arrow-right ml-2"></i>
                     </div>
-                </div>
+                </a>
 
-                <!-- Shake X -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-shake-x')">
-                    <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="text-rose animate-shake-x text-xl font-display">Invalid Input</div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Shake X</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Shake X')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Shake Y -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-shake-y')">
-                     <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="text-stone-400 animate-shake-y text-2xl"><i class="fa-regular fa-thumbs-down"></i></div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Shake Y</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Shake Y')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Head Shake -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-head-shake')">
-                     <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="w-12 h-12 bg-stone-100 rounded-full flex items-center justify-center animate-head-shake text-stone-500"><i class="fa-regular fa-face-meh"></i></div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Head Shake</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Head Shake')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Swing -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-swing')">
-                    <div class="h-24 flex items-center justify-center mb-6">
-                         <div class="origin-top animate-swing flex flex-col items-center">
-                             <div class="w-px h-6 bg-stone-300"></div>
-                             <div class="w-16 h-10 border border-gold bg-goldLight/20 flex items-center justify-center text-xs text-stone-600 font-display">Shop</div>
-                         </div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Swing</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Swing')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Tada -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-tada')">
-                    <div class="h-24 flex items-center justify-center mb-6">
-                         <div class="text-3xl text-gold animate-tada"><i class="fa-solid fa-gift"></i></div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Tada</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Tada')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Heartbeat -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-heartbeat')">
-                    <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="text-3xl text-rose animate-heartbeat"><i class="fa-solid fa-heart"></i></div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Heartbeat</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Heartbeat')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                 <!-- Jello -->
-                 <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-jello')">
-                    <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="px-3 py-1 bg-stone-100 rounded text-stone-500 animate-jello">Soft</div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Jello</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Jello')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                 <!-- Wobble -->
-                 <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-wobble')">
-                    <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="w-10 h-10 bg-accent/50 rounded-full animate-wobble blur-[1px]"></div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Wobble</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Wobble')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-                
-                 <!-- Flash -->
-                 <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-flash')">
-                    <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="w-12 h-12 bg-gold rounded-full animate-flash opacity-80"></div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Flash</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Flash')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. 3D & Flip -->
-        <section id="flippers" class="mb-24">
-            <div class="text-center mb-16 reveal">
-                 <span class="block text-gold text-2xl mb-2"><i class="fa-solid fa-rotate-left"></i></span>
-                <h2 class="text-3xl font-display text-stone-700">Flip & 3D</h2>
-                <div class="w-12 h-0.5 bg-gold/50 mx-auto mt-4"></div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Flip -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-flip')">
-                    <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="w-16 h-20 bg-stone-100 text-stone-600 border border-stone-200 flex items-center justify-center text-2xl font-display animate-flip shadow-sm">A</div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Flip</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Flip')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Flip In X -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-flip-in-x')">
-                     <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="px-6 py-3 bg-rose text-white rounded-sm animate-flip-in-x font-display">Menu Item</div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Flip In X</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Flip In X')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Flip In Y -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-flip-in-y')">
-                     <div class="h-24 flex items-center justify-center mb-6">
-                        <div class="w-16 h-20 bg-goldLight text-stone-700 flex items-center justify-center font-display text-xl animate-flip-in-y">Card</div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Flip In Y</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Flip In Y')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. テキストと装飾 -->
-        <section id="text-decor" class="mb-24">
-            <div class="text-center mb-16 reveal">
-                 <span class="block text-gold text-2xl mb-2"><i class="fa-solid fa-signature"></i></span>
-                <h2 class="text-3xl font-display text-stone-700">Typography</h2>
-                <div class="w-12 h-0.5 bg-gold/50 mx-auto mt-4"></div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Tracking In -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-tracking-in')">
-                    <div class="h-24 flex items-center justify-center mb-6 overflow-hidden">
-                        <div class="text-xl font-display text-stone-800 tracking-widest animate-tracking-in uppercase">Elegance</div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Tracking In</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Tracking In')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Blur In -->
-                <div class="anim-card rounded-xl p-8 relative group" onclick="replayAnim(this, 'animate-blur-in')">
-                     <div class="h-24 flex items-center justify-center mb-6 overflow-hidden">
-                        <div class="text-xl font-display italic text-stone-600 animate-blur-in">Focus</div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Blur In</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Blur In')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Floating -->
-                <div class="anim-card rounded-xl p-8 relative group">
-                     <div class="h-24 flex items-center justify-center mb-6 overflow-hidden">
-                        <div class="w-12 h-12 bg-gradient-to-tr from-goldLight to-white rounded-full animate-float shadow-lg border border-white"></div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-stone-100 pt-4">
-                        <h3 class="text-lg font-medium text-stone-700 font-display">Floating</h3>
-                        <button class="text-stone-300 hover:text-gold transition-colors relative" onclick="event.stopPropagation(); copyText(this, 'Floating')">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip">Copied!</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="bg-stone-100 py-12 border-t border-stone-200 text-center">
-        <div class="container mx-auto px-6">
-            <p class="text-stone-500 font-display mb-4">
-                Designed for Sophisticated Web Experiences
-            </p>
-            <div class="text-gold opacity-50 text-sm">
-                &copy; 2026 Animation Collection
             </div>
         </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-muted/60 text-xs font-serif tracking-widest border-t border-gold/10">
+        &copy; 2026 Web Design Hub. Crafted with Elegance.
     </footer>
 
-    <script>
-        // クリックでアニメーションをリプレイする関数
-        function replayAnim(element, animClass) {
-            const target = element.querySelector('.' + animClass);
-            if (!target) return;
-            
-            // クラスを一度削除
-            target.classList.remove(animClass);
-            
-            // リフローを強制
-            void target.offsetWidth;
-            
-            // クラスを再付与
-            target.classList.add(animClass);
-        }
-
-        // コピー機能
-        function copyText(button, text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const tooltip = button.querySelector('.tooltip');
-                tooltip.classList.add('show');
-                setTimeout(() => {
-                    tooltip.classList.remove('show');
-                }, 1500);
-            });
-        }
-
-        // スクロール時のフェードイン（Intersection Observer）
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
 </body>
 </html>
