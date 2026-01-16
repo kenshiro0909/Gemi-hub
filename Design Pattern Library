@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Pattern Collection | 絢爛豪華なデザイン見本帳</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Zen+Old+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Zen Old Mincho"', 'serif'],
+                        display: ['"Cinzel"', 'serif'],
+                    },
+                    colors: {
+                        bg: '#FFFCF5',        /* ウォームクリーム (真珠色) */
+                        surface: '#FFFFFF',
+                        text: '#3E2723',      /* ディープブラウン (視認性重視) */
+                        muted: '#8D6E63',     /* ウォームブラウン */
+                        gold: '#D4AF37',      /* リッチゴールド */
+                        goldLight: '#F9E79F', 
+                        accent: '#C2185B',    /* ルビーレッド (女性らしさと華やかさ) */
+                        dark: '#261C19'       /* エスプレッソ */
+                    },
+                    backgroundImage: {
+                        'gradient-luxury': 'linear-gradient(135deg, #C2185B 0%, #D4AF37 100%)',
+                        'gradient-gold': 'linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c)',
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 30px -5px rgba(194, 24, 91, 0.15)',
+                        'glow': '0 0 15px rgba(212, 175, 55, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Zen Old Mincho', serif;
+            background-color: #FFFCF5;
+            color: #3E2723;
+            /* 繊細なダマスク風の透かし模様をイメージしたテクスチャ */
+            background-image: 
+                radial-gradient(circle at 100% 100%, rgba(212, 175, 55, 0.05) 10px, transparent 11px),
+                radial-gradient(circle at 0% 0%, rgba(194, 24, 91, 0.03) 20px, transparent 21px);
+            background-size: 60px 60px;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            margin-bottom: 8px;
+            background-color: #3E2723;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            white-space: nowrap;
+            font-family: sans-serif;
+            letter-spacing: 0.05em;
+            z-index: 50;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .tooltip.show {
+            opacity: 1;
+            animation: fadeOut 2.5s forwards;
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Wrapper */
+        .pattern-wrapper {
+            background: #ffffff;
+            border: 1px solid #F3E5F5;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+        .pattern-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #C2185B, #D4AF37);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .pattern-wrapper:hover {
+            border-color: #D4AF37;
+            box-shadow: 0 15px 35px -5px rgba(194, 24, 91, 0.15);
+            transform: translateY(-4px);
+        }
+        .pattern-wrapper:hover::before {
+            opacity: 1;
+        }
+
+        /* Preview Area */
+        .preview-box {
+            background-color: #FFFBFB; /* ほんのりピンクがかった白 */
+            border: 1px solid #FCE4EC;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        /* Grid Textures for Previews */
+        .preview-nav { align-items: flex-start; padding-top: 0; }
+        .preview-hero { min-height: 160px; }
+        
+        /* Abstract Representations - Adjusted colors for the new theme */
+        .line { height: 4px; background: #E0E0E0; border-radius: 2px; }
+        .box { background: #F5F5F5; border-radius: 2px; }
+        .circle { border-radius: 50%; background: #E0E0E0; }
+
+        /* Typography Embellishments */
+        .text-gradient-gold {
+            background: linear-gradient(to right, #bf953f, #b38728);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Header -->
+    <nav class="fixed w-full z-50 bg-[#FFFCF5]/90 backdrop-blur-md border-b border-[#E1BEE7] shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-gradient-luxury flex items-center justify-center text-white text-sm shadow-glow">
+                    <i class="fa-solid fa-gem"></i>
+                </div>
+                <span class="text-xl font-display font-bold tracking-widest text-text">
+                    Luxe<span class="text-accent">Prompts</span>
+                </span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-[11px] tracking-[0.2em] uppercase text-muted font-bold">
+                <a href="#navs" class="hover:text-accent transition-colors relative group">
+                    Navs
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#heroes" class="hover:text-accent transition-colors relative group">
+                    Heroes
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#cards" class="hover:text-accent transition-colors relative group">
+                    Cards
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#forms" class="hover:text-accent transition-colors relative group">
+                    Forms
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#footers" class="hover:text-accent transition-colors relative group">
+                    Footers
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full"></span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Title -->
+    <header class="pt-40 pb-20 px-6 text-center relative overflow-hidden">
+        <!-- Decorative bg elements -->
+        <div class="absolute top-20 left-10 w-64 h-64 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="container mx-auto relative z-10">
+            <span class="inline-block py-1 px-3 border border-gold/30 rounded-full text-gold text-[10px] font-bold tracking-[0.3em] uppercase mb-6 bg-white/50 backdrop-blur-sm">
+                Premium Collection
+            </span>
+            <h1 class="text-4xl md:text-6xl font-display font-semibold mb-6 text-text leading-tight">
+                Design Pattern <br><span class="text-gradient-gold">Prompts</span>
+            </h1>
+            <p class="text-muted text-sm font-serif max-w-lg mx-auto leading-loose">
+                視認性と美しさを兼ね備えた、絢爛豪華なデザインパターン集。<br>
+                プロンプトをコピーして、Geminiで魔法のようなサイトを生成しましょう。
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 pb-32 space-y-32">
+
+        <!-- 1. NAVIGATIONS (10 Patterns) -->
+        <section id="navs">
+            <div class="flex items-center mb-10">
+                <div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center mr-4 text-accent bg-white shadow-soft">
+                    <span class="font-display text-xl">01</span>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-display text-text">Navigation Patterns</h2>
+                    <p class="text-xs text-muted tracking-widest uppercase mt-1">First Impression</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- 1. Classic Left -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Classic Standard</div>
+                    <div class="preview-box preview-nav p-3">
+                        <div class="w-full flex justify-between items-center border-b border-rose-100 pb-2">
+                            <div class="w-16 h-4 bg-text rounded-sm"></div>
+                            <div class="flex space-x-2"><div class="w-8 h-2 bg-rose-200 rounded-sm"></div><div class="w-8 h-2 bg-rose-200 rounded-sm"></div></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Navigation', '左側にロゴ、右側にメニューリンクを配置したクラシックなナビゲーション。フォントは明朝体を使用し、リンク色は深みのあるブラウン、ホバー時にゴールドに変化。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative group">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 2. Centered Logo -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Centered Luxury</div>
+                    <div class="preview-box preview-nav p-3">
+                         <div class="w-full flex justify-between items-center border-b border-rose-100 pb-2">
+                            <div class="w-8 h-2 bg-rose-200 rounded-sm"></div>
+                            <div class="w-16 h-5 bg-text mx-auto rounded-sm"></div>
+                            <div class="w-8 h-2 bg-rose-200 rounded-sm"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Navigation', '中央にロゴを配置したシンメトリーな高級ブランド風ナビゲーション。セリフ体を使用し、アクセントにゴールドを取り入れたエレガントなデザイン。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 3. Double Decker -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Double Utility</div>
+                    <div class="preview-box preview-nav flex-col p-0">
+                        <div class="w-full h-5 bg-text mb-2"></div>
+                        <div class="w-full flex justify-between px-3"><div class="w-12 h-3 bg-rose-300 rounded-sm"></div><div class="w-4 h-3 bg-gold rounded-sm"></div></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Navigation', '上部に濃いブラウンのユーティリティバー（送料無料通知など）、その下に白背景のメインナビがある2段構成。視認性が高く、ECサイトに最適。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 4. Minimal Hamburger -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Minimal Hamburger</div>
+                    <div class="preview-box preview-nav p-3">
+                        <div class="w-full flex justify-between items-center">
+                            <div class="w-12 h-4 bg-text rounded-sm"></div>
+                            <div class="w-6 h-6 border border-gold/50 flex items-center justify-center rounded-full"><div class="w-3 h-0.5 bg-text"></div></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Navigation', 'メニューを隠し、ロゴとハンバーガーメニューのみを表示したミニマルデザイン。ハンバーガーアイコンは細い線で上品に、クリックでドロワーが展開。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 5. Split CTA -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">With CTA Button</div>
+                    <div class="preview-box preview-nav p-3">
+                         <div class="w-full flex justify-between items-center border-b border-rose-100 pb-2">
+                            <div class="w-10 h-4 bg-text rounded-sm"></div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-12 h-2 bg-rose-200 rounded-sm"></div>
+                                <div class="w-8 h-5 bg-gradient-luxury rounded-sm shadow-sm"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Navigation', '右端にルビー色の目立つCTAボタン（予約・購入）を配置したナビゲーション。ボタンはグラデーションとシャドウで宝石のような立体感を出す。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 6. Transparent Overlay -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Transparent</div>
+                    <div class="preview-box preview-nav p-0 relative">
+                        <div class="absolute inset-0 bg-rose-100"></div>
+                        <div class="relative w-full flex justify-between p-3">
+                            <div class="w-10 h-3 bg-white/90 rounded-sm"></div>
+                            <div class="w-16 h-2 bg-white/60 rounded-sm"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Navigation', '背景透明でヒーロー画像に重なるオーバーレイナビゲーション。スクロールすると白背景に変化し、ゴールドの影がつくスクリプトを含む。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 7. Vertical Sidebar -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Vertical Sidebar</div>
+                    <div class="preview-box flex-row items-stretch p-0">
+                        <div class="w-1/4 h-full border-r border-rose-100 flex flex-col items-center pt-3 bg-white">
+                            <div class="w-5 h-5 bg-text mb-2 rounded-full"></div>
+                            <div class="w-2 h-8 bg-gold/50 rounded-sm"></div>
+                        </div>
+                        <div class="w-3/4 bg-rose-50/50"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Navigation', '画面左固定の縦型サイドバー。白背景にゴールドのアクセントライン、洗練された縦書きまたはアイコン付きメニュー。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 8. Mega Menu -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Mega Menu</div>
+                    <div class="preview-box preview-nav flex-col p-3">
+                         <div class="w-full flex justify-between mb-1"><div class="w-8 h-3 bg-text rounded-sm"></div><div class="w-12 h-2 bg-rose-200 rounded-sm"></div></div>
+                         <div class="w-full h-8 border border-rose-100 bg-white shadow-soft mt-1 rounded-sm"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Navigation', 'ホバーで大きく展開するメガメニュー。ドロップダウン内にはカテゴリー画像や特集バナーを配置し、カタログのような美しさを演出。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 9. Bottom App Style -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Bottom App Style</div>
+                    <div class="preview-box flex-col justify-end p-0 bg-rose-50">
+                        <div class="w-full h-10 bg-white border-t border-rose-100 flex justify-around items-center px-2 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+                            <div class="w-4 h-4 bg-rose-200 rounded-full"></div>
+                            <div class="w-5 h-5 bg-gradient-luxury rounded-full shadow-glow"></div>
+                            <div class="w-4 h-4 bg-rose-200 rounded-full"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Navigation', 'スマホアプリ風のボトムナビゲーション。中央の主要アクションボタンを大きくし、グラデーションで強調。女性の指でも押しやすいサイズ感。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 10. Social & Search -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Social & Search</div>
+                    <div class="preview-box preview-nav p-3">
+                         <div class="w-full flex justify-between items-center">
+                            <div class="flex space-x-1"><div class="w-3 h-3 bg-gold/50 rounded-full"></div><div class="w-3 h-3 bg-gold/50 rounded-full"></div></div>
+                            <div class="w-12 h-4 bg-text rounded-sm"></div>
+                            <div class="w-5 h-5 border border-rose-200 rounded-full flex items-center justify-center"><div class="w-2 h-2 rounded-full border border-muted"></div></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Navigation', 'ロゴを中央に、SNSアイコンと検索バーを配置。インフルエンサーやメディア向け。アイコンは細線でゴールド、ホバーでカラーに変化。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 2. HERO AREAS (10 Patterns) -->
+        <section id="heroes">
+            <div class="flex items-center mb-10">
+                <div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center mr-4 text-accent bg-white shadow-soft">
+                    <span class="font-display text-xl">02</span>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-display text-text">Hero Section Patterns</h2>
+                    <p class="text-xs text-muted tracking-widest uppercase mt-1">Captivating Visuals</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+
+                <!-- 1. Center Typography -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Minimal Typography</div>
+                    <div class="preview-box preview-hero flex-col text-center p-4 bg-white">
+                        <div class="w-8 h-1 bg-gold mb-3 mx-auto"></div>
+                        <div class="w-3/4 h-8 bg-text mb-3 rounded-sm"></div>
+                        <div class="w-1/2 h-2 bg-rose-200 mx-auto rounded-sm"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Hero', '美しいセリフ体のタイポグラフィを中央に配置。画像を使わず、文字と余白、そしてゴールドの装飾線だけで魅せる、詩的で洗練されたヒーロー。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 2. Split Screen -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Split Elegance</div>
+                    <div class="preview-box preview-hero flex-row p-0">
+                        <div class="w-1/2 h-full bg-rose-100"></div>
+                        <div class="w-1/2 h-full p-3 flex flex-col justify-center bg-white">
+                            <div class="w-full h-5 bg-text mb-2 rounded-sm"></div>
+                            <div class="w-2/3 h-2 bg-muted rounded-sm"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Hero', '画面を左右分割。片側は美しいポートレート画像、もう片側は白背景にエレガントなテキスト。境界線は設けず、空気感のあるレイアウト。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 3. Full Background -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Full Background</div>
+                    <div class="preview-box preview-hero relative p-0">
+                        <div class="absolute inset-0 bg-rose-200"></div>
+                        <div class="relative z-10 w-full h-full flex flex-col items-center justify-center bg-dark/30">
+                            <div class="w-1/2 h-5 bg-white mb-2 shadow-sm rounded-sm"></div>
+                            <div class="w-1/4 h-3 bg-white/80 rounded-sm"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Hero', '画面いっぱいの背景画像の上に、白文字とゴールドのボタンを配置。画像には薄いダークブラウンのフィルターをかけ、文字の視認性と落ち着きを確保。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 4. Card Overlay -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Floating Card</div>
+                    <div class="preview-box preview-hero relative p-0 items-end justify-center pb-4">
+                        <div class="absolute inset-0 bg-rose-100"></div>
+                        <div class="relative z-10 w-3/4 h-16 bg-white shadow-soft p-3 flex flex-col justify-center rounded border border-white/50 backdrop-blur-sm">
+                             <div class="w-1/2 h-2 bg-text mb-1 rounded-sm"></div>
+                             <div class="w-full h-1 bg-rose-200 rounded-sm"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Hero', '背景画像の手前に、半透明の白いガラス風カードを重ねてテキストを表示。奥行きと透明感のある、現代的でゴージャスなレイアウト。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 5. Product Center -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Product Altar</div>
+                    <div class="preview-box preview-hero flex-col justify-end p-0 bg-[#FFFCF5]">
+                        <div class="w-full text-center mt-3 mb-auto"><div class="w-2/3 h-5 bg-text mx-auto rounded-sm"></div></div>
+                        <div class="w-32 h-32 bg-gradient-luxury rounded-t-full mx-auto shadow-glow opacity-90 p-1">
+                            <div class="w-full h-full bg-white rounded-t-full"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Hero', 'アーチ状の背景装飾の手前に商品を配置し、まるで祭壇のように商品を美しく際立たせるレイアウト。化粧品や香水に最適。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 6. Asymmetrical Grid -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Artistic Grid</div>
+                    <div class="preview-box preview-hero p-2 gap-2 bg-white">
+                        <div class="w-2/3 h-full bg-rose-100 rounded-sm"></div>
+                        <div class="w-1/3 flex flex-col gap-2">
+                            <div class="h-1/2 bg-gold/20 rounded-sm"></div>
+                            <div class="h-1/2 bg-text text-white p-1 text-[4px] flex items-center justify-center font-serif rounded-sm">Story</div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Hero', '非対称なグリッドで画像と色面を組み合わせた、雑誌の1ページのようなアーティスティックなレイアウト。余白を多めに取り、上品に。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 7. Video Background -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Cinematic Video</div>
+                    <div class="preview-box preview-hero relative p-0">
+                        <div class="absolute inset-0 bg-dark flex items-center justify-center text-gold/50"><i class="fa-solid fa-film"></i></div>
+                        <div class="relative z-10 text-center">
+                            <div class="w-24 h-5 bg-white/90 mx-auto rounded-sm shadow-glow"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Hero', 'スローモーションの美しい映像を背景に使用し、シネマティックな雰囲気を演出。テキストは繊細な明朝体で中央に配置。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 8. Diagonal Split -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Diagonal Flow</div>
+                    <div class="preview-box preview-hero relative p-0 overflow-hidden bg-white">
+                        <div class="absolute top-0 right-0 w-2/3 h-full bg-rose-50 transform skew-x-[-15deg] origin-top-right border-l border-gold/30"></div>
+                         <div class="relative z-10 p-4 pt-10">
+                            <div class="w-1/3 h-5 bg-text rounded-sm"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Hero', '画面を緩やかな斜めのラインで分割。動きを感じさせつつ、ゴールドのボーダーラインで区切ることで気品を保ったデザイン。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 9. Carousel -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Elegant Slider</div>
+                    <div class="preview-box preview-hero relative p-0">
+                        <div class="w-full h-full bg-rose-100 flex items-center justify-between px-3">
+                            <div class="w-5 h-5 bg-white/50 rounded-full flex items-center justify-center text-[8px] text-text"><</div>
+                            <div class="w-5 h-5 bg-white/50 rounded-full flex items-center justify-center text-[8px] text-text">></div>
+                        </div>
+                        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-1">
+                            <div class="w-2 h-2 bg-text rounded-full"></div><div class="w-2 h-2 bg-white rounded-full"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Hero', 'ゆっくりとフェード切り替えする画像スライダー。矢印やインジケーターは細く繊細なデザインにし、画像の美しさを邪魔しないように。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 10. Search Focus -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Luxury Search</div>
+                    <div class="preview-box preview-hero flex-col justify-center items-center bg-dark p-4 relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-20 bg-gradient-luxury"></div>
+                        <div class="relative z-10 w-2/3 h-5 bg-white mb-4 rounded-sm shadow-lg"></div>
+                        <div class="relative z-10 w-full h-10 bg-white rounded-full border border-gold flex items-center px-3 shadow-glow">
+                             <div class="w-4 h-4 bg-gold rounded-full ml-auto"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Hero', '中央に配置したエレガントな検索バー。背景は暗めの色にゴールドの粒子を散りばめたようなデザインで、検索体験自体を特別に。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. CARDS (10 Patterns) -->
+        <section id="cards">
+            <div class="flex items-center mb-10">
+                <div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center mr-4 text-accent bg-white shadow-soft">
+                    <span class="font-display text-xl">03</span>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-display text-text">Card Layout Patterns</h2>
+                    <p class="text-xs text-muted tracking-widest uppercase mt-1">Details & Elegance</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- 1. Standard Blog -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Standard Blog</div>
+                    <div class="preview-box flex-col p-4 bg-white border border-rose-50 items-start shadow-sm">
+                        <div class="w-full h-20 bg-rose-100 mb-2 rounded-sm"></div>
+                        <div class="w-10 h-1 bg-gold mb-1"></div>
+                        <div class="w-3/4 h-3 bg-text mb-2 rounded-sm"></div>
+                        <div class="w-full h-1 bg-rose-200 rounded-sm"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Card', '画像の下にテキストを配置した標準的なカード。全体を細いゴールドの線で囲み、ホバー時にふわりと浮き上がるシャドウエフェクトを追加。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 2. Minimal Product -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Jewelry Product</div>
+                    <div class="preview-box flex-col p-4 bg-white items-center text-center">
+                        <div class="w-20 h-24 bg-rose-50 mb-2 rounded-sm border border-gold/20"></div>
+                        <div class="w-1/2 h-2 bg-text mb-1 rounded-sm"></div>
+                        <div class="w-1/4 h-2 bg-accent/50 rounded-sm"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Card', '余白を大きくとり、商品を美術館の展示物のように見せるデザイン。商品名には明朝体を使用し、価格は小さく控えめに。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 3. Horizontal List -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Horizontal List</div>
+                    <div class="preview-box flex-row p-4 bg-white items-center gap-3 border border-rose-50">
+                        <div class="w-16 h-16 bg-rose-100 shrink-0 rounded-full border border-gold/30"></div>
+                        <div class="flex-1">
+                            <div class="w-3/4 h-3 bg-text mb-2 rounded-sm"></div>
+                            <div class="w-full h-1 bg-rose-200 rounded-sm"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Card', '左に円形の画像、右にテキストを配置した横長カード。リストとして並べた時に美しく見えるよう、区切り線には薄いグラデーションを使用。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 4. Feature Icon Box -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Feature Jewel</div>
+                    <div class="preview-box flex-col p-4 bg-white items-center text-center border border-gold/20 shadow-soft">
+                        <div class="w-8 h-8 rounded-full bg-gradient-luxury mb-2 shadow-glow"></div>
+                        <div class="w-1/2 h-3 bg-text mb-2 rounded-sm"></div>
+                        <div class="w-3/4 h-1 bg-rose-200 rounded-sm"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Card', '宝石のようなアイコンを上部に配置し、全体を淡いクリーム色のボックスで囲んだ特徴紹介カード。高級感のあるホバーアニメーション付き。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 5. Profile / Team -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Profile Elegance</div>
+                    <div class="preview-box flex-col p-4 bg-white items-center text-center">
+                        <div class="w-16 h-16 rounded-full bg-rose-100 mb-2 border-2 border-gold p-1"></div>
+                        <div class="w-1/2 h-3 bg-text mb-1 rounded-sm"></div>
+                        <div class="w-1/3 h-2 bg-gold/50 rounded-sm"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Card', '画像を二重のゴールドの円で囲み、エレガントさを強調したプロフィールカード。名前の下に筆記体の役職名を添えて。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 6. Pricing Table -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Pricing Luxury</div>
+                    <div class="preview-box flex-col p-4 bg-dark items-center text-center text-white relative overflow-hidden border border-gold">
+                        <div class="absolute top-0 right-0 w-8 h-8 bg-gradient-luxury transform rotate-45 translate-x-4 -translate-y-4"></div>
+                        <div class="w-1/3 h-2 bg-stone-400 mb-2 rounded-sm"></div>
+                        <div class="w-1/2 h-6 bg-gold text-dark mb-4 rounded-sm shadow-glow"></div>
+                        <div class="w-full h-1 bg-stone-600 mb-1 rounded-sm"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Card', '濃いブラウン背景にゴールドの文字が映える料金プランカード。推奨プランにはルビー色のリボンや発光するボーダーをあしらい、特別感を演出。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 7. Glassmorphism -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Glass Effect</div>
+                    <div class="preview-box flex-col p-4 relative items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-br from-rose-200 to-gold/20"></div>
+                        <div class="relative w-3/4 h-20 bg-white/60 border border-white/80 backdrop-blur-md shadow-soft rounded p-2">
+                             <div class="w-1/2 h-2 bg-text mb-2 rounded-sm"></div>
+                             <div class="w-full h-1 bg-rose-300 rounded-sm"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Card', '磨りガラスのような質感のカード。背景にピンクやゴールドのぼかしを入れ、女性らしい柔らかさと奥行きを表現。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 8. Hover Reveal -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Golden Reveal</div>
+                    <div class="preview-box relative p-0 overflow-hidden group border border-gold/20">
+                        <div class="absolute inset-0 bg-rose-50"></div>
+                        <div class="absolute inset-0 bg-gradient-luxury opacity-90 flex items-center justify-center translate-y-full transition-transform group-hover:translate-y-0">
+                            <div class="w-1/2 h-2 bg-white rounded-sm shadow-sm"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Card', 'ホバーすると下からゴールドとルビーのグラデーションオーバーレイが上がり、白文字で詳細を表示するドラマチックなカード。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 9. Testimonial Card -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Elegant Quote</div>
+                    <div class="preview-box flex-col p-4 bg-white border border-rose-50 relative">
+                        <div class="absolute -top-2 left-4 w-6 h-6 bg-gold text-white flex items-center justify-center rounded-full text-xs shadow-sm">“</div>
+                        <div class="w-full h-1 bg-rose-100 mb-2 mt-2"></div>
+                        <div class="w-3/4 h-1 bg-rose-100 mb-2"></div>
+                        <div class="flex items-center gap-2 mt-auto">
+                            <div class="w-6 h-6 rounded-full bg-rose-200"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Card', '大きなセリフ体の引用符をゴールドの円で囲んで配置。紙のような質感の背景に、上品な明朝体でレビューを表示。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                 <!-- 10. Masonry Style -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Gallery Tile</div>
+                    <div class="preview-box flex-col p-0 bg-rose-50 relative border border-gold/10">
+                        <div class="absolute bottom-0 w-full p-2 bg-white/90 backdrop-blur-sm border-t border-rose-100">
+                             <div class="w-2/3 h-2 bg-text rounded-sm"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Card', '画像の美しさを最大限に活かす枠なしデザイン。下部に半透明のキャプションエリアを設け、可読性と美観を両立。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. FORMS (10 Patterns) -->
+        <section id="forms">
+            <!-- (Content similar to previous but with updated styles/prompts - Keeping structure for brevity, applying new styles) -->
+            <div class="flex items-center mb-10">
+                <div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center mr-4 text-accent bg-white shadow-soft">
+                    <span class="font-display text-xl">04</span>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-display text-text">Form Patterns</h2>
+                    <p class="text-xs text-muted tracking-widest uppercase mt-1">Interactions</p>
+                </div>
+            </div>
+             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                
+                <!-- 1. Underline Input -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Golden Underline</div>
+                    <div class="preview-box flex-col p-4 bg-white items-start justify-center">
+                        <div class="w-1/3 h-1 bg-muted mb-2 rounded-sm"></div>
+                        <div class="w-full h-8 border-b-2 border-rose-200"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Form', '枠線をなくし、下線のみを使用した入力フォーム。フォーカスすると下線がゴールドに光り、じんわりと広がるアニメーション。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+                
+                 <!-- 2. Floating Label -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Floating Label</div>
+                    <div class="preview-box flex-col p-4 bg-white items-start justify-center">
+                        <div class="w-full h-10 border border-rose-200 relative rounded-sm bg-rose-50/30">
+                            <div class="absolute -top-2 left-2 bg-white px-1 w-1/3 h-1 bg-muted"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Form', '入力欄をクリックするとラベルが浮き上がるフローティングラベル。背景色にほんのりクリーム色を使い、優しさをプラス。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 3. Newsletter -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Luxury Newsletter</div>
+                    <div class="preview-box flex-row p-4 items-center gap-0">
+                         <div class="w-2/3 h-8 border border-gold/30 bg-white"></div>
+                         <div class="w-1/3 h-8 bg-gradient-luxury shadow-glow"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Form', '入力欄と登録ボタンが一体化したニュースレターフォーム。ボタンはルビーとゴールドのグラデーションで、宝石のような輝き。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 4. Round Search -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Pill Search</div>
+                    <div class="preview-box flex-col p-4 items-center justify-center">
+                        <div class="w-full h-8 rounded-full border border-rose-200 bg-white flex items-center px-2 shadow-sm">
+                             <div class="w-3 h-3 bg-gold rounded-full ml-auto"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Form', '完全な円形の検索バー（ピル型）。枠線は淡いピンクベージュ、検索アイコンはゴールドにし、アクセサリーのような可愛らしさを。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 5. Solid Box -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Soft Box</div>
+                    <div class="preview-box flex-col p-4 items-start justify-center gap-2">
+                        <div class="w-full h-8 bg-rose-50 border-none rounded-sm"></div>
+                        <div class="w-full h-8 bg-rose-50 border-none rounded-sm"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Form', '枠線のない、非常に薄いピンクベージュの背景色を使った入力ボックス。角をわずかに丸くし、柔らかい印象に。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                 <!-- 6. Custom Select -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Jewel Checkbox</div>
+                    <div class="preview-box flex-col p-4 items-start justify-center gap-2">
+                        <div class="flex items-center gap-2"><div class="w-4 h-4 border border-accent rounded-full flex items-center justify-center"><div class="w-2 h-2 bg-accent rounded-full"></div></div><div class="w-16 h-1 bg-text"></div></div>
+                        <div class="flex items-center gap-2"><div class="w-4 h-4 border border-rose-300 rounded-sm"></div><div class="w-16 h-1 bg-rose-300"></div></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Form', 'チェックボックスやラジオボタンをブランドカラー（ルビーピンク）でカスタマイズ。選択時にポッと色がつくアニメーション。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 7. Multi Step -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Elegant Steps</div>
+                    <div class="preview-box flex-col p-4 items-center justify-center">
+                        <div class="flex items-center gap-1 mb-2">
+                            <div class="w-4 h-4 rounded-full bg-gold text-[6px] text-white flex items-center justify-center font-serif">1</div>
+                            <div class="w-8 h-0.5 bg-gold"></div>
+                            <div class="w-4 h-4 rounded-full border border-rose-200"></div>
+                        </div>
+                        <div class="w-full h-6 border border-rose-100 bg-white"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Form', 'ステップ進行状況をゴールドの線と円で表現。完了したステップは宝石のように塗りつぶされ、進行感を優雅に演出。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 8. Login Card -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Invitation Card</div>
+                    <div class="preview-box flex-col p-4 bg-rose-50 items-center justify-center">
+                        <div class="w-3/4 bg-white shadow-soft p-2 flex flex-col gap-2 border border-gold/20">
+                             <div class="w-full h-4 border border-rose-100 bg-rose-50/20"></div>
+                             <div class="w-full h-4 bg-gradient-luxury rounded-sm"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Form', '招待状のようなデザインのログインカード。縁取りにゴールドの飾り枠を使用し、特別な場所への入り口であることを表現。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                 <!-- 9. Contact Grid -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Contact Grid</div>
+                    <div class="preview-box flex-col p-4 items-center justify-center gap-2">
+                        <div class="flex w-full gap-2">
+                            <div class="w-1/2 h-6 border border-rose-200 bg-white"></div>
+                            <div class="w-1/2 h-6 border border-rose-200 bg-white"></div>
+                        </div>
+                        <div class="w-full h-10 border border-rose-200 bg-white"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Form', 'すっきりとしたグリッドレイアウトの問い合わせフォーム。線は細く、色は淡くし、入力された文字（ディープブラウン）が主役になるように。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 10. File Upload -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Upload Area</div>
+                    <div class="preview-box flex-col p-4 items-center justify-center">
+                        <div class="w-full h-full border-2 border-dashed border-rose-300 rounded flex flex-col items-center justify-center p-2 bg-rose-50/30">
+                             <div class="w-4 h-4 border border-gold mb-1 rounded-full"></div>
+                             <div class="w-1/2 h-1 bg-muted"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Form', 'アップロード領域をピンクベージュの破線で囲み、背景に極薄いピンクを敷く。殺風景になりがちなエリアを温かみのあるデザインに。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. FOOTERS (10 Patterns) -->
+        <section id="footers">
+             <div class="flex items-center mb-10">
+                <div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center mr-4 text-accent bg-white shadow-soft">
+                    <span class="font-display text-xl">05</span>
+                </div>
+                <div>
+                    <h2 class="text-3xl font-display text-text">Footer Patterns</h2>
+                    <p class="text-xs text-muted tracking-widest uppercase mt-1">Lasting Impression</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                 <!-- 1. Minimal Centered -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Minimal Chic</div>
+                    <div class="preview-box flex-col p-4 items-center justify-center bg-white border-t border-rose-100">
+                         <div class="w-16 h-3 bg-text mb-2 rounded-sm"></div>
+                         <div class="flex gap-2 mb-2"><div class="w-6 h-1 bg-rose-300"></div><div class="w-6 h-1 bg-rose-300"></div></div>
+                         <div class="w-10 h-1 bg-rose-100"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Footer', '中央揃えのシンプルなフッター。背景は清潔感のある白。ロゴとコピーライト、少しのリンクのみを配置し、余韻を残す終わり方。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+                
+                <!-- 2. Multi Column -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Dark Luxury</div>
+                    <div class="preview-box flex-row p-4 items-start justify-between bg-dark gap-2 border-t-4 border-gold">
+                        <div class="w-1/4 h-8 bg-stone-700 rounded-sm"></div>
+                        <div class="w-1/4 h-8 bg-stone-700 rounded-sm"></div>
+                        <div class="w-1/4 h-8 bg-stone-700 rounded-sm"></div>
+                        <div class="w-1/4 h-8 bg-stone-700 rounded-sm"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Footer', '濃いエスプレッソブラウンの背景に、ゴールドの文字が映える多カラムフッター。上部にゴールドのボーダーラインを引き、引き締め効果をプラス。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 3. Newsletter Focus -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Newsletter Focus</div>
+                    <div class="preview-box flex-col p-4 items-center bg-rose-50">
+                        <div class="w-full h-8 border border-rose-200 bg-white mb-2 flex items-center px-2 shadow-sm">
+                            <div class="w-4 h-2 bg-gradient-luxury ml-auto rounded-sm"></div>
+                        </div>
+                        <div class="w-full h-px bg-rose-200 mb-2"></div>
+                        <div class="flex w-full justify-between"><div class="w-8 h-1 bg-muted"></div><div class="w-8 h-1 bg-muted"></div></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Footer', '背景に淡いピンクベージュを使用。上部にエレガントな登録フォームを配置し、ブランドの世界観への参加を促すデザイン。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 4. Big Typography -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Brand Statement</div>
+                    <div class="preview-box flex-col p-4 items-center justify-center bg-dark text-white relative overflow-hidden">
+                        <div class="w-full text-center text-[30px] leading-none font-serif text-gold/20 font-bold">LUXE</div>
+                        <div class="flex justify-between w-full mt-auto px-2 relative z-10"><div class="w-4 h-1 bg-stone-500"></div><div class="w-4 h-1 bg-stone-500"></div></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Footer', '背景に巨大なブランドロゴを透かしで配置し、圧倒的な存在感を出すフッター。色はダークブラウン×ゴールドで重厚感を演出。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                 <!-- 5. Social Bar -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Social Ribbon</div>
+                    <div class="preview-box flex-row p-4 items-center justify-between bg-white border-t border-rose-100">
+                        <div class="w-16 h-1 bg-rose-300"></div>
+                        <div class="flex gap-1"><div class="w-2 h-2 rounded-full bg-gold"></div><div class="w-2 h-2 rounded-full bg-gold"></div><div class="w-2 h-2 rounded-full bg-gold"></div></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Footer', 'コンテンツの最後にリボンのように配置される薄いフッター。SNSアイコンをゴールドにし、アクセサリーのように並べる。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                 <!-- 6. Logo & Description -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Brand Story</div>
+                    <div class="preview-box flex-row p-4 items-start bg-[#FFFCF5]">
+                        <div class="w-1/2 pr-2">
+                             <div class="w-8 h-2 bg-text mb-1 rounded-sm"></div>
+                             <div class="w-full h-1 bg-muted mb-0.5"></div>
+                             <div class="w-2/3 h-1 bg-muted"></div>
+                        </div>
+                        <div class="w-1/2 flex justify-end gap-1">
+                             <div class="w-4 h-8 bg-rose-100 rounded-sm"></div>
+                             <div class="w-4 h-8 bg-rose-100 rounded-sm"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Footer', '左側にロゴとブランドストーリー、右側にリンク集。背景色はサイト全体のベースカラー（クリーム）を使い、一体感を持たせる。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                 <!-- 7. App Download -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">App Access</div>
+                    <div class="preview-box flex-col p-4 items-center justify-center bg-dark">
+                        <div class="flex gap-2 mb-2">
+                            <div class="w-12 h-4 border border-stone-600 rounded bg-stone-800"></div>
+                            <div class="w-12 h-4 border border-stone-600 rounded bg-stone-800"></div>
+                        </div>
+                        <div class="w-1/2 h-1 bg-stone-600"></div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Footer', 'アプリストアボタンをスタイリッシュなダークカラーの背景に配置。ボタン自体も高級感のあるマットな質感で仕上げる。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                 <!-- 8. Contact Focus -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Concierge Info</div>
+                    <div class="preview-box flex-row p-4 items-center bg-dark text-white gap-2 border-t border-gold">
+                        <div class="w-1/3 text-[6px]">
+                            <div class="mb-1 text-gold">Salon</div>
+                            <div class="w-full h-0.5 bg-stone-600"></div>
+                        </div>
+                        <div class="w-1/3 text-[6px]">
+                             <div class="mb-1 text-gold">Tel</div>
+                             <div class="w-full h-0.5 bg-stone-600"></div>
+                        </div>
+                         <div class="w-1/3 text-[6px]">
+                             <div class="mb-1 text-gold">Mail</div>
+                             <div class="w-full h-0.5 bg-stone-600"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Footer', 'コンシェルジュデスクのような連絡先表示。見出しをゴールドにし、高級ホテルのようなおもてなしの心を表現。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                 <!-- 9. Map Embed -->
+                 <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Location Map</div>
+                    <div class="preview-box flex-row p-0 bg-white h-full border border-rose-100">
+                        <div class="w-1/2 h-full bg-rose-50 flex items-center justify-center"><div class="w-2 h-2 bg-text rounded-full shadow-glow"></div></div>
+                        <div class="w-1/2 p-2">
+                             <div class="w-10 h-2 bg-text mb-1 rounded-sm"></div>
+                             <div class="w-full h-1 bg-muted"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Footer', '地図を埋め込み、実店舗へのアクセスを案内。地図の配色は彩度を落とし、サイト全体のトーンに馴染ませるカスタムスタイルで。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+                <!-- 10. Reveal on Scroll -->
+                <div class="pattern-wrapper">
+                    <div class="text-[10px] uppercase tracking-widest text-accent mb-3 font-bold">Curtain Reveal</div>
+                    <div class="preview-box flex-col p-0 bg-white relative overflow-hidden">
+                        <div class="w-full h-full bg-white relative z-10 translate-y-[-10px] shadow-lg"></div>
+                        <div class="absolute bottom-0 w-full h-8 bg-dark flex items-center justify-center">
+                            <div class="w-1/2 h-1 bg-gold"></div>
+                        </div>
+                    </div>
+                    <button onclick="copyPrompt(this, 'Footer', 'スクロールするとカーテンが開くように下から現れるフッター。最後にサプライズと高級感を与える演出。')" class="w-full py-3 text-xs border border-rose-200 text-muted hover:border-accent hover:text-accent hover:bg-rose-50 transition-all duration-300 rounded font-bold tracking-wider relative">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2 text-gold"></i>Copy Prompt <span class="tooltip">Copied!</span>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-dark py-12 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="w-12 h-12 mx-auto bg-gradient-luxury rounded-full flex items-center justify-center mb-6 shadow-glow">
+                <i class="fa-solid fa-crown text-white"></i>
+            </div>
+            <p class="text-xs text-gold font-bold tracking-[0.3em] uppercase opacity-80">
+                Generated Prompts compatible with Gemini 1.5 & 2.0
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // プロンプト生成・コピー機能 (Updated with new color scheme instructions)
+        function copyPrompt(buttonElement, category, description) {
+            const basePrompt = `
+Tailwind CSSを使用して、Webサイト用の「${category}」コンポーネントを作成してください。
+以下のデザイン要件に従って、HTMLコードのみを出力してください。
+
+【デザインテーマ: 絢爛豪華 (Gorgeous & Elegant)】
+- コンセプト: 「視認性の高さ」と「女性らしい華やかさ」の両立。高級ジュエリーやハイブランドのような世界観。
+- ベースカラー: ウォームクリーム (#FFFCF5) または清潔感のある白。
+- テキストカラー: ディープブラウン (#3E2723) で、黒よりも柔らかく上品に。
+- アクセントカラー: 
+  1. ルビーレッド (#C2185B): 女性らしさと視認性を高めるメインアクセント。
+  2. リッチゴールド (#D4AF37): 高級感と輝きを演出するサブアクセント。
+- フォント: 
+  - 日本語: 明朝体（Zen Old Mincho, Noto Serif JP）
+  - 英語見出し: 装飾的なセリフ体（Cinzel, Cormorant Garamond）
+- 装飾: 繊細なボーダーライン、宝石のようなシャドウ（glow effect）、グラデーションを使用。
+
+【コンポーネントの特徴・要件】
+${description}
+
+【出力形式】
+- 必要なGoogle Fontsの読み込みコードを含めてください。
+- Font Awesomeのアイコンを使用してください。
+- レスポンシブ対応（モバイル・デスクトップ）を考慮してください。
+`;
+
+            const textToCopy = basePrompt.trim();
+            
+            const textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            textArea.style.position = "fixed"; 
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                const tooltip = buttonElement.querySelector('.tooltip');
+                if (tooltip) {
+                    tooltip.classList.add('show');
+                    setTimeout(() => {
+                        tooltip.classList.remove('show');
+                    }, 2000);
+                }
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>
